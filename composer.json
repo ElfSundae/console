@@ -1,8 +1,8 @@
 {
     "name": "elfsundae/console",
     "type": "library",
-    "description": "PHP Console Command",
-    "keywords": ["console", "command"],
+    "description": "CLI library based on Laravel Artisan for creating PHP console scripts.",
+    "keywords": ["console", "command", "cli", "laravel", "artisan", "script"],
     "homepage": "https://github.com/ElfSundae/console",
     "license": "MIT",
     "authors": [
