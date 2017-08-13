@@ -1,8 +1,8 @@
 {
     "name": "elfsundae/console",
     "type": "library",
-    "description": "",
-    "keywords": ["console"],
+    "description": "PHP Console Command",
+    "keywords": ["console", "command"],
     "homepage": "https://github.com/ElfSundae/console",
     "license": "MIT",
     "authors": [
@@ -14,7 +14,8 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.*"
+        "illuminate/container": "5.*",
+        "illuminate/events": "5.*"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -32,16 +33,6 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
-        "laravel": {
-            "providers": [
-                "ElfSundae\\Console\\ConsoleServiceProvider"
-            ]
-        }
     },
     "config": {
         "sort-packages": true
