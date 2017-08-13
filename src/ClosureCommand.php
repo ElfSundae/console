@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Steal Illuminate\Foundation\Console\ClosureCommand
+ * Steal `Illuminate\Foundation\Console\ClosureCommand`.
  */
 class ClosureCommand extends Command
 {
