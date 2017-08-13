@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use ElfSundae\Console\Application;
+
+Application::runCommand(
+    'My Basic Tool',
+    '1.0',
+    Application::command('basic {username=Elf Sundae}', function ($username) {
+        $username = title_case($username);
+
+        $this->comment("Hello, $username!");
+    })
+);
