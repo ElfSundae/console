@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use Illuminate\Console\Command;
+use ElfSundae\Console\Application;
+
+class Example extends Command
+{
+    protected $signature = 'example
+        {--foo=bar : The "foo" option description}';
+
+    protected $description = 'Example command description';
+
+    public function handle()
+    {
+        $this->comment($this->option('foo'));
+    }
+}
+
+Application::runCommand('Example Tool', '1.0', new Example);
