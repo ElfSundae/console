@@ -3,6 +3,7 @@
 namespace ElfSundae\Console;
 
 use Closure;
+use Exception;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Command\Command;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
@@ -26,16 +27,26 @@ class Application extends LaravelConsoleApplication
     }
 
     /**
-     * Add a command object.
+     * Register a new command.
      *
-     * @param  \Symfony\Component\Console\Command\Command  $command
+     * @param  mixed  $command
      * @return $this
      */
-    public function add(Command $command)
+    public function register($command)
     {
-        parent::add($command);
+        $num = func_num_args();
 
-        if (func_num_args() > 1 && (bool) func_get_arg(1) == true) {
+        if (is_string($command) && $num > 1 && func_get_arg(1) instanceof Closure) {
+            $command = call_user_func_array([static::class, 'makeCommand'], func_get_args());
+        }
+
+        if ($command instanceof Command) {
+            $this->add($command);
+        } else {
+            throw new Exception("Invalid parameters", 1);
+        }
+
+        if ($num > 1 && func_get_arg($num - 1) === true) {
             $this->setDefaultCommand($command->getName(), true);
         }
 
@@ -47,11 +58,12 @@ class Application extends LaravelConsoleApplication
      *
      * @param  string  $signature
      * @param  \Closure  $callback
+     * @param  string  $description
      * @return \ElfSundae\Console\ClosureCommand
      */
-    public static function command($signature, Closure $callback)
+    public static function makeCommand($signature, Closure $callback, $description = null)
     {
-        return new ClosureCommand($signature, $callback);
+        return (new ClosureCommand($signature, $callback))->describe($description);
     }
 
     /**
@@ -59,13 +71,15 @@ class Application extends LaravelConsoleApplication
      *
      * @param  string  $name
      * @param  string  $version
-     * @param  \Symfony\Component\Console\Command\Command  $command
+     * @param  mixed  ...$command
      * @return int
      */
-    public static function runCommand($name, $version, Command $command)
+    public static function execute($name, $version, ...$command)
     {
+        $command[] = true;
+
         return (new static($name, $version))
-            ->add($command, true)
+            ->register(...$command)
             ->run();
     }
 }
