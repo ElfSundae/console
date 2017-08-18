@@ -3,10 +3,7 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use Illuminate\Console\Command;
-use ElfSundae\Console\Application;
-
-class Example extends Command
+class ExampleCommand extends Illuminate\Console\Command
 {
     protected $signature = 'example
         {--foo=bar : The "foo" option description}';
@@ -19,4 +16,8 @@ class Example extends Command
     }
 }
 
-Application::runCommand('Example Tool', '1.0', new Example);
+(new ElfSundae\Console\Application)
+    ->add($command = new ExampleCommand)
+    ->getApplication()
+    ->setDefaultCommand($command->getName(), true)
+    ->run();

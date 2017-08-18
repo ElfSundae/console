@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+$app = new ElfSundae\Console\Application('Magic Tool', '1.2.3');
+
+$app->command('foo', function () {
+    $this->info($this->getName());
+});
+
+$app->command('bar', function () {
+    $this->info($this->getName());
+});
+
+$app->run();

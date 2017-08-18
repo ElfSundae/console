@@ -3,14 +3,12 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use ElfSundae\Console\Application;
+$app = new ElfSundae\Console\Application;
 
-Application::runCommand(
-    'Basic Tool',
-    '1.0',
-    Application::command('basic {username=Elf Sundae}', function ($username) {
-        $username = title_case($username);
+$app->command('basic {username}', function ($username) {
+    $this->comment(title_case($username));
+}, 'The `basic` command description');
 
-        $this->line("Hello, <comment>$username</comment>!");
-    })->describe('Command description')
-);
+$app->setDefaultCommand('basic', true);
+
+$app->run();
