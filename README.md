@@ -17,8 +17,60 @@ $ composer require elfsundae/console
 
 ## Usage
 
+First, create a PHP script and make it executable:
+
+```php
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+$app = new ElfSundae\Console\Application;
+
+// ... register commands
+
+$app->run();
+```
+
+Then, you can register commands using `add` or `command` method.
+
+The `add` method accepts an `Illuminate\Console\Command` instance or a `Symfony\Component\Console\Command\Command` instance. The `command` method may be used for register a Closure based command, it accepts three arguments: the command signature, a Closure which receives the commands arguments and options, and the optional description of the command.
+
+```php
+class ExampleCommand extends Illuminate\Console\Command
+{
+    protected $signature = 'example
+        {--foo=bar : The "foo" option description}';
+
+    protected $description = 'Example command description';
+
+    public function handle()
+    {
+        $this->comment($this->option('foo'));
+    }
+}
+
+$app->add(new ExampleCommand);
+
+$app->command('title {username}', function ($username) {
+    $this->comment(title_case($username));
+}, 'The `title` command description');
+```
+
+You may pass `true` to the second argument of the `setDefaultCommand` method to build a single command application:
+
+```php
+(new ElfSundae\Console\Application)
+    ->add($command = new ExampleCommand)
+    ->getApplication()
+    ->setDefaultCommand($command->getName(), true)
+    ->run();
+```
+
+## Documentation
+
 - [Laravel Artisan][]
-- [Symfony Console Component]
+- [Symfony Console Component][]
 
 ## Testing
 
