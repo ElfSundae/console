@@ -37,7 +37,7 @@ Then, you can register commands using `add` or `command` method.
 The `add` method accepts an `Illuminate\Console\Command` instance or a `Symfony\Component\Console\Command\Command` instance. The `command` method may be used for register a Closure based command, it accepts three arguments: the command signature, a Closure which receives the commands arguments and options, and the optional description of the command.
 
 ```php
-class ExampleCommand extends Illuminate\Console\Command
+class Example extends Illuminate\Console\Command
 {
     protected $signature = 'example
         {--foo=bar : The "foo" option description}';
@@ -50,7 +50,7 @@ class ExampleCommand extends Illuminate\Console\Command
     }
 }
 
-$app->add(new ExampleCommand);
+$app->add(new Example);
 
 $app->command('title {username}', function ($username) {
     $this->comment(title_case($username));
@@ -61,7 +61,7 @@ You may pass `true` to the second argument of the `setDefaultCommand` method to 
 
 ```php
 (new ElfSundae\Console\Application)
-    ->add($command = new ExampleCommand)
+    ->add($command = new Example)
     ->getApplication()
     ->setDefaultCommand($command->getName(), true)
     ->run();
