@@ -6,7 +6,7 @@ require __DIR__.'/../vendor/autoload.php';
 class ExampleCommand extends Illuminate\Console\Command
 {
     protected $signature = 'example
-        {--foo=bar : The "foo" option description}';
+        {--f|foo=bar : The "foo" option description}';
 
     protected $description = 'Example command description';
 
