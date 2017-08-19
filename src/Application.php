@@ -5,7 +5,9 @@ namespace ElfSundae\Console;
 use Closure;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
+use Symfony\Component\Console\Output\OutputInterface;
 use Illuminate\Console\Application as LaravelApplication;
 
 class Application extends LaravelApplication
@@ -42,5 +44,21 @@ class Application extends LaravelApplication
         return $this->add(
             (new ClosureCommand($signature, $callback))->describe($description)
         );
+    }
+
+    /**
+     * Run the current application as a single command application.
+     *
+     * @param  \Symfony\Component\Console\Input\InputInterface|null  $input
+     * @param  \Symfony\Component\Console\Output\OutputInterface|null  $output
+     * @return int
+     */
+    public function runAsSingle(InputInterface $input = null, OutputInterface $output = null)
+    {
+        if ($command = array_last($this->all())) {
+            $this->setDefaultCommand($command->getName(), true);
+        }
+
+        return $this->run($input, $output);
     }
 }

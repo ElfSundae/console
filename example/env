@@ -14,5 +14,4 @@ try {
         $this->comment(env('ACCOUNT', 'default value'));
     })
     ->getApplication()
-    ->setDefaultCommand('env', true)
-    ->run();
+    ->runAsSingle();
