@@ -57,7 +57,7 @@ $app->command('title {username}', function ($username) {
 }, 'The `title` command description');
 ```
 
-You may pass `true` to the second argument of the `setDefaultCommand` method to build a single command application:
+To build a single command application, you may pass `true` to the second argument of the `setDefaultCommand` method, or just call the `runAsSingle` method:
 
 ```php
 (new ElfSundae\Console\Application)
@@ -65,6 +65,13 @@ You may pass `true` to the second argument of the `setDefaultCommand` method to 
     ->getApplication()
     ->setDefaultCommand($command->getName(), true)
     ->run();
+```
+
+```php
+(new ElfSundae\Console\Application)
+    ->add(new Example)
+    ->getApplication()
+    ->runAsSingle();
 ```
 
 ## Documentation
