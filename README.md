@@ -7,7 +7,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/console/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/console/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/elfsundae/console.svg?style=flat-square)](https://packagist.org/packages/elfsundae/console)
 
-CLI library based on [Laravel Artisan][] for creating PHP console scripts.
+CLI library based on [Laravel Console][Laravel Artisan] for creating PHP console application.
 
 ## Installation
 
