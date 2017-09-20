@@ -3,6 +3,7 @@
 namespace ElfSundae\Console;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,11 +21,7 @@ class Application extends LaravelApplication
      */
     public function __construct($name = 'Console Application', $version = '1.0.0')
     {
-        parent::__construct(
-            $laravel = new Container,
-            new EventsDispatcher($laravel),
-            $version
-        );
+        parent::__construct($laravel = new Container, new EventsDispatcher($laravel), $version);
 
         $this->setName($name);
         $this->setAutoExit(true);
@@ -55,7 +52,7 @@ class Application extends LaravelApplication
      */
     public function runAsSingle(InputInterface $input = null, OutputInterface $output = null)
     {
-        if ($command = array_last($this->all())) {
+        if ($command = Arr::last($this->all())) {
             $this->setDefaultCommand($command->getName(), true);
         }
 
