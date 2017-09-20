@@ -16,8 +16,7 @@
         "php": ">=5.6.4",
         "illuminate/console": "^5.4",
         "illuminate/container": "^5.4",
-        "illuminate/events": "^5.4",
-        "vlucas/phpdotenv": "^2.2"
+        "illuminate/events": "^5.4"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -38,5 +37,8 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "suggest": {
+        "vlucas/phpdotenv": "Loads environment variables from .env to getenv(), $_ENV and $_SERVER automagically."
     }
 }
